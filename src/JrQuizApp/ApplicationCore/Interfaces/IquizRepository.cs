@@ -5,12 +5,13 @@ using System.Text;
 
 namespace ApplicationCore.Interfaces
 {
-    public interface IquizRepository
+    public interface IQuizRepository
     {
         List<Quiz> QuizList();
         Quiz GetById(int id);
         void Add(Quiz NewQuiz);
         void Update(Quiz EditedQuiz);
         void Delete(Quiz QuizToDelete);
+       
     }
 }

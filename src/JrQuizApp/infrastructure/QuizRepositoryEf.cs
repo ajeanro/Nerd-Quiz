@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace infrastructure
 {
-    public class QuizRepositoryEf : IquizRepository
+    public class QuizRepositoryEf : IQuizRepository
     {
         private readonly QuizContext _DbContext;
 
@@ -19,6 +20,7 @@ namespace infrastructure
         public void Add(Quiz NewQuiz)
         {
             _DbContext.Add(NewQuiz);
+            
             _DbContext.SaveChanges();
         }
 
@@ -29,7 +31,10 @@ namespace infrastructure
 
         public Quiz GetById(int id)
         {
-            return new Quiz();
+            return _DbContext.Quizzes
+                .Include(q => q.Questions)
+                .ThenInclude(q => q.Choices)
+                .FirstOrDefault(q => q.Id == id);
         }
 
         public List<Quiz> QuizList()

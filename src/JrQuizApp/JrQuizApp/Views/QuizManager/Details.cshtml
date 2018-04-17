@@ -1,0 +1,86 @@
+﻿@model ApplicationCore.Entities.Quiz
+
+@{
+    ViewData["Title"] = "Details";
+    int count = 1, countR = 0;
+}
+
+
+<div>
+    
+    <h2 class="quiztitle">@Html.DisplayFor(model => model.Name)</h2>
+    <hr />
+
+</div>
+@*<div>
+
+        @foreach (var question in Model.Questions)
+        {
+        <div id="@question.Id" class="question">
+            <div class="questionText">@question.Text</div>
+            <h4>Choices:</h4>
+            @foreach (var choice in question.Choices)
+            {
+            <div id="@choice.Id" data-isCorrect="@choice.IsCorrect" class="choice">@choice.Text</div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="choice" id="@choice.Id" data-isCorrect="@choice.IsCorrect">
+                    <label class="form-check-label" for="choice">
+                        @choice.Text
+                    </label>
+                </div>
+                }
+            </div>
+            }
+
+        </div>
+    </div>*@
+
+
+<div class="container">
+    <div class="Quiz">
+
+        <h4 style="margin-top: 4%;"> <span class="label label-info">Questions :</span> </h4>
+
+
+
+        <form id="quizform">
+            @foreach (var question in Model.Questions)
+            {
+                <div class="BlockQ" id=@question.Id data-count="@count" style="border: 1px solid #bdbdbd; width: 75%; border-radius: 4px; margin-top: 40px; background-color: #f0ffff; padding: 8px;">
+
+                    <div class="Question" style="padding: 2%; border: 1px solid limegreen; background-color: lemonchiffon;">
+                        <span class="label label-warning"> @string.Format("{0}{1}.", "Q", count)</span>
+                        <span id="@string.Format("{0}{1}", "ID_Q", count)" style="display:none;">@question.Id</span>
+                        <p style="display: inline; padding: 2%;" id="@string.Format("{0}{1}", "Q", count)">@question.Text</p>
+                    </div>
+
+                    <div class="Choices" style="margin-left: 8%;">
+
+                        @foreach (var choice in question.Choices)
+                        {
+                            <label class="radio-inline">
+                                <input type="radio" data-isCorrect="@choice.IsCorrect" name="@string.Format("{0}{1}", "inlineRadioOptions",count)" id="@string.Format("{0}{1}", "inlineRadio", countR)" value="@choice.Text" style="margin-left: -16px;"> @choice.Text
+                            </label><br />
+                            countR++;
+                        }
+
+                    </div> <!--END Choices-->
+
+                    <div id="@string.Format("{0}{1}{2}", "Ans","Q", count)">
+
+
+                    </div>
+
+                </div> <!-- END BlockQ -->
+                count++;
+            }
+            <span id="countQuections" style="display:none;">@count</span>
+            <button type="button" id="SubmitQuiz" class="btn btn-primary" style="margin-top: 10px;"><span class="glyphicon glyphicon-ok"></span>   Submit Quiz </button>
+
+        </form>
+    </div>
+</div>
+
+@*@section Scripts {
+    <script src="~/js/site.js"></script>
+}*@

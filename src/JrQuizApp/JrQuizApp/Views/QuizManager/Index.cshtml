@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ApplicationCore.Entities.Quiz>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<h2 class="karma">Welcome to Quiz Karma</h2>
+@*<div id="instruction">
+    <h3>Instructions</h3>
+    <p>
+        Are You ready to have some fun? <br>
+        Select your Quiz <br />
+        Pick your answers <br />
+        Submit the Quiz Form <br />
+        Check the Results and see how well you performed.
+    </p>
+</div>*@
+
+<div>
+    <h3 id="selectquiz">Select A Quiz and LET'S GO!</h3>
+
+    <div id="select">
+        @foreach (var quiz in Model)
+        {
+            <h4><a asp-controller="QuizManager" asp-action="Details" asp-route-id=@quiz.Id>@quiz.Name</a></h4>
+  
+        }
+    </div>
+</div>

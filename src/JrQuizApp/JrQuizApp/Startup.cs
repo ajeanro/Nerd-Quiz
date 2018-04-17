@@ -42,7 +42,9 @@ namespace JrQuizApp
             services.AddTransient<IEmailSender, EmailSender>();
             
             services.AddMvc();
-            services.AddScoped<IquizRepository, QuizRepositoryEf>();
+            services.AddScoped<IQuizRepository, QuizRepositoryEf>();
+            services.AddScoped<IQuestionRepository, QuestionRepositoryEf>();
+            services.AddScoped<IChoiceRepository, ChoiceRepositoryEf>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,7 +69,7 @@ namespace JrQuizApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=QuizManager}/{action=Index}/{id?}");
             });
         }
     }
